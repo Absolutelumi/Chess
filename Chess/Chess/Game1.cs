@@ -18,6 +18,18 @@ namespace Chess
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D chessBoard;
+        Texture2D chesswallpaper; 
+        Texture2D pawn;
+        Texture2D knight;
+        Texture2D rook;
+        Texture2D bishop;
+        Texture2D king;
+        Texture2D queen;
+
+        int moveVal = 90;
+
+        bool gameStart = false; 
 
         public Game1()
         {
@@ -26,14 +38,15 @@ namespace Chess
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
+        /// Setting up base game window
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 720;
+            graphics.ApplyChanges(); 
+            IsFixedTimeStep = false; 
+            IsMouseVisible = true;
 
             base.Initialize();
         }
@@ -44,9 +57,11 @@ namespace Chess
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            chesswallpaper = Content.Load<Texture2D>("chess-background");
+            chessBoard = Content.Load<Texture2D>("chess-board");
+            pawn = Content.Load<Texture2D>("chess_piece_pawn");
 
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
 
@@ -54,6 +69,7 @@ namespace Chess
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
         /// </summary>
+        // TODO: Add leaderboards
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
@@ -67,10 +83,11 @@ namespace Chess
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            // TODO: Add your update logic here
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && gameStart == false)
+                gameStart = true;
 
             base.Update(gameTime);
         }
@@ -81,9 +98,21 @@ namespace Chess
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            if (gameStart == false)
+            {
+                spriteBatch.Draw(chesswallpaper, new Rectangle(0, 0, 720, 720), Color.White);
+            }
+
+            else
+            {
+                spriteBatch.Draw(chessBoard, new Rectangle(0, 0, 720, 720), Color.White);
+
+
+            }
+            spriteBatch.End();       
 
             base.Draw(gameTime);
         }
