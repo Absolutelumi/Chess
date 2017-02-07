@@ -16,20 +16,24 @@ namespace Chess
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        #region
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont font;
         Texture2D chessBoard;
-        Texture2D chesswallpaper; 
+        Texture2D chesswallpaper;
         Texture2D pawn;
         Texture2D knight;
         Texture2D rook;
         Texture2D bishop;
         Texture2D king;
         Texture2D queen;
+        Rectangle piecePosition;
 
         int moveVal = 90;
 
-        bool gameStart = false; 
+        bool gameStart = false;
+        #endregion
 
         public Game1()
         {
@@ -44,7 +48,8 @@ namespace Chess
         {
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 720;
-            graphics.ApplyChanges(); 
+            graphics.ApplyChanges();
+
             IsFixedTimeStep = false; 
             IsMouseVisible = true;
 
@@ -58,8 +63,14 @@ namespace Chess
         protected override void LoadContent()
         {
             chesswallpaper = Content.Load<Texture2D>("chess-background");
+            font = Content.Load<SpriteFont>("font");
             chessBoard = Content.Load<Texture2D>("chess-board");
             pawn = Content.Load<Texture2D>("chess_piece_pawn");
+            rook = Content.Load<Texture2D>("chess_piece_rook");
+            bishop = Content.Load <Texture2D>("chess_piece_bishop");
+            knight = Content.Load<Texture2D>("chess_piece_knight");
+            king = Content.Load<Texture2D>("chess_piece_king");
+            queen = Content.Load<Texture2D>("chess_piece_queen");
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
@@ -82,12 +93,17 @@ namespace Chess
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && gameStart == false)
                 gameStart = true;
+
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            if (mouseState.LeftButton == ButtonState.Pressed && piecePosition.Contains(mousePosition))
+
+
 
             base.Update(gameTime);
         }
@@ -104,13 +120,14 @@ namespace Chess
             if (gameStart == false)
             {
                 spriteBatch.Draw(chesswallpaper, new Rectangle(0, 0, 720, 720), Color.White);
+
+                spriteBatch.DrawString(font, "Chess", new Vector2(240, 30), Color.White, 0, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0.5f);
+                spriteBatch.DrawString(font, "Space to start", new Vector2(220, 400), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0.5f);
             }
 
             else
             {
                 spriteBatch.Draw(chessBoard, new Rectangle(0, 0, 720, 720), Color.White);
-
-
             }
             spriteBatch.End();       
 
