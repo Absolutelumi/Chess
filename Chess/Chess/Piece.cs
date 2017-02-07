@@ -20,39 +20,95 @@ namespace Chess
 
         public abstract bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn);
 
-        public void drawPiece(SpriteBatch spriteBatch)
-        {
-
-        }
+        public abstract void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle);
     }
 
     class Pawn : Piece
     {
-        
+        public override bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn)
+        {
+            bool valid = false;
+            int originColumn = 0;
+            int originRow = 0;
+
+            if(destinationColumn == originColumn && destinationRow == originRow + 1)
+            {
+                valid = true;
+            }
+
+            return valid;
+        }
+
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle)
+        {
+
+
+            throw new NotImplementedException();
+        }
     }
 
     class King : Piece
     {
+        public override bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle)
+        {
+            
+        }
     }
 
     class Queen : Piece
     {
+        public override bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class Bishop : Piece
     {
+        public override bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class Rook : Piece
     {
+        public override bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class Knight : Piece
     {
+        public override bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

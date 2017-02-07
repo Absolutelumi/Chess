@@ -13,28 +13,8 @@ namespace Chess
 {
     class Board
     {
-        public static void move(int pos, int moveval)
-        {
+        public Piece[,] board = new Piece[8, 8]; 
 
-        }
-
-        public static void canMoveTo()
-        {
-
-        }
-
-        public static void pieceAt()
-        {
-
-        }
-
-        public static bool isValidMove(Rectangle destination)
-        {
-            bool validMove = false;
-
-
-
-            return validMove;
-        }
+        
     }
 }

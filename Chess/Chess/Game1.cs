@@ -128,6 +128,8 @@ namespace Chess
             else
             {
                 spriteBatch.Draw(chessBoard, new Rectangle(0, 0, 720, 720), Color.White);
+
+                 
             }
             spriteBatch.End();       
 
