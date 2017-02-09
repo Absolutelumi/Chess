@@ -114,6 +114,8 @@ namespace Chess
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            Pawn pawnC = new Pawn();
+
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
@@ -129,7 +131,7 @@ namespace Chess
             {
                 spriteBatch.Draw(chessBoard, new Rectangle(0, 0, 720, 720), Color.White);
 
-                 
+                pawnC.drawPiece(spriteBatch, pawn, new Rectangle(), true); 
             }
             spriteBatch.End();       
 

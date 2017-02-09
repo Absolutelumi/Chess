@@ -13,8 +13,12 @@ namespace Chess
 {
     class Board
     {
-        public Piece[,] board = new Piece[8, 8]; 
+        public Pawn pawn = new Pawn();
+        public King king = new King();
 
-        
+        public Piece[,] move(Piece[,] destination)
+        {
+            return destination;
+        }
     }
 }
