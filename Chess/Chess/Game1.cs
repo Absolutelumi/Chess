@@ -96,9 +96,6 @@ namespace Chess
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && gameStart == false)
-                gameStart = true;
-
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
             if (mouseState.LeftButton == ButtonState.Pressed && piecePosition.Contains(mousePosition))
@@ -114,23 +111,15 @@ namespace Chess
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            Pawn pawnC = new Pawn();
+
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            if (gameStart == false)
-            {
-                spriteBatch.Draw(chesswallpaper, new Rectangle(0, 0, 720, 720), Color.White);
-
-                spriteBatch.DrawString(font, "Chess", new Vector2(240, 30), Color.White, 0, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0.5f);
-                spriteBatch.DrawString(font, "Space to start", new Vector2(220, 400), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0.5f);
-            }
-
-            else
-            {
                 spriteBatch.Draw(chessBoard, new Rectangle(0, 0, 720, 720), Color.White);
 
-                 
-            }
+                pawnC.drawPiece(spriteBatch, pawn, true);
+                pawnC.drawPiece(spriteBatch, pawn, false);
             spriteBatch.End();       
 
             base.Draw(gameTime);
