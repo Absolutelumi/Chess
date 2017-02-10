@@ -15,16 +15,20 @@ namespace Chess
     {
         public Texture2D texture { get; set; }
         public bool white { get; set; }
-        public int row { get; set; }
-        public int column { get; set; }
+        public int[] row = {-10, 75, 160, 245, 330, 415, 500};
+        public int[] column = {-10, 75, 160, 245, 330, 415, 500};
+        public int width = 100;
+        public int height = 100;
 
         public abstract bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn);
 
-        public abstract void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle, bool spawn);
+        public abstract void drawPiece(SpriteBatch spriteBatch, Texture2D texture, bool white);
     }
 
     class Pawn : Piece
     {
+        
+
         public override bool IsValidMove(Piece[,] board, int destinationRow, int destinationColumn)
         {
             bool valid = false;
@@ -39,13 +43,17 @@ namespace Chess
             return valid;
         }
 
-        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle, bool spawn)
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, bool white)
         {
-            if(spawn == true)
+            for(int i = 0; i > 7; i++)
             {
-                for (int i = 0; i > 8; i++)
+                if (white == true)
                 {
-                    spriteBatch.Draw(texture, new Rectangle(-10, 650, 50, 50), Color.White);
+                    spriteBatch.Draw(texture, new Rectangle(column[i], row[1], width, height), Color.WhiteSmoke);
+                }
+                else
+                {
+                    spriteBatch.Draw(texture, new Rectangle(column[i], row[6], width, height), Color.White);
                 }
             }
         }
@@ -58,7 +66,7 @@ namespace Chess
             throw new NotImplementedException();
         }
 
-        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, Rectangle rectangle, bool spawn)
+        public override void drawPiece(SpriteBatch spriteBatch, Texture2D texture, bool white)
         {
             throw new NotImplementedException();
         }
