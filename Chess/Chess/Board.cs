@@ -13,8 +13,19 @@ namespace Chess
 {
     class Board
     {
-        public Piece[,] board = new Piece[8, 8]; 
-
+        public Piece[,] board = new Piece[8, 8];
+        Pawn pawn = new Pawn();
+        King king = new King();
+        Queen queen = new Queen();
         
+        public void movePawn()
+        {
+
+
+            if(pawn.IsValidMove() == true)
+            {
+
+            }
+        }
     }
 }
