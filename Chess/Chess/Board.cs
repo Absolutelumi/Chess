@@ -20,5 +20,10 @@ namespace Chess
         {
             return destination;
         }
+
+        internal static void Draw()
+        {
+            
+        }
     }
 }
